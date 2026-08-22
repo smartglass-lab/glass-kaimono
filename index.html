@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=600, height=600, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Meta Ray-Ban Display 用の買い物チェックリスト。文字入力なしでカタログから品目を選んでリストを作り、店内では視界の中のリストをタップでチェックオフ。ハンズフリーで買い忘れゼロに。">
+  <meta name="mrbd-web-app-capable" content="yes">
+  <title>グラス買い物メモ — Glass Kaimono</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ホーム（チェックリスト） -->
+    <div id="home" class="screen">
+      <header class="header">
+        <h1>🛒 グラス買い物メモ</h1>
+        <span class="header-meta" id="home-meta">のこり ０品</span>
+      </header>
+      <div class="progress-track" id="home-progress-track">
+        <div class="progress-fill" id="home-progress"></div>
+      </div>
+      <div class="content home-content">
+        <div class="shop-list" id="shop-list"></div>
+        <p class="empty-note hidden" id="empty-note">リストはからっぽ。<br>「ついか」からえらんでね。</p>
+        <div class="rail">
+          <button class="rail-btn focusable" data-action="add">＋ ついか</button>
+          <button class="rail-btn ghost focusable" data-action="menu">⋯ そうさ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- カタログ（カテゴリえらび） -->
+    <div id="catalog" class="screen hidden">
+      <header class="header slim">
+        <button class="back-btn focusable" data-action="back">&#8592;</button>
+        <h1>カテゴリをえらぶ</h1>
+        <span class="header-meta" id="catalog-meta"></span>
+      </header>
+      <div class="content">
+        <div class="cat-list scroll-fade" id="cat-list"></div>
+      </div>
+    </div>
+
+    <!-- 品目えらび -->
+    <div id="items" class="screen hidden">
+      <header class="header slim">
+        <button class="back-btn focusable" data-action="back">&#8592;</button>
+        <h1 id="items-title">やさい</h1>
+        <span class="header-meta" id="items-meta"></span>
+      </header>
+      <div class="content">
+        <p class="hint-note">タップでリストに いれる／はずす</p>
+        <div class="item-grid scroll-fade" id="item-grid"></div>
+        <button class="rail-btn done-add focusable" data-action="back">✓ これでOK</button>
+      </div>
+    </div>
+
+    <!-- そうさメニュー -->
+    <div id="menu" class="screen hidden">
+      <header class="header slim">
+        <button class="back-btn focusable" data-action="back">&#8592;</button>
+        <h1>そうさ</h1>
+      </header>
+      <div class="content menu-content">
+        <button class="menu-item focusable" data-action="uncheck-all">↩ チェックをぜんぶはずす</button>
+        <button class="menu-item focusable" data-action="remove-checked">🗑 チェックずみをけす</button>
+        <button class="menu-item danger focusable" data-action="clear-all">🧹 リストをからにする</button>
+        <button class="menu-item focusable" data-action="back">← もどる</button>
+      </div>
+    </div>
+
+    <!-- かんりょう -->
+    <div id="done" class="screen hidden">
+      <div class="content done-content">
+        <div class="done-burst" aria-hidden="true">🎉</div>
+        <h2 class="done-title">おかいものコンプリート！</h2>
+        <p class="done-sub" id="done-sub">ぜんぶチェックしました</p>
+        <button class="menu-item focusable" data-action="finish-clear">🧹 リストをからにしてもどる</button>
+        <button class="menu-item focusable" data-action="finish-keep">← そのままもどる</button>
+      </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
